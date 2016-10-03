@@ -33,7 +33,6 @@ Application.prototype.init = function(){
 	
 	// scroll and incremental render
 	
-	var $table = $('#table');
 	var pagesMargin = parseInt($('#pages').css('margin-top'));
 	this.windowHeight = $(window).height();
 	
@@ -43,7 +42,7 @@ Application.prototype.init = function(){
 		}
 	});
 	
-	$table.on('click', 'td', function(){
+	$('#table').on('click', 'td', function(){
 		var color = $(this).data('color');
 		$(this).animate({backgroundColor: color}, 1000); // required plugin: jquery.animate-colors
 	});
@@ -73,7 +72,7 @@ Application.prototype.generateObject = function(){
 }
 
 Application.prototype.getRandomInt = function(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+	return Math.floor(Math.random() * (max - min)) + min;
 }
 
 Application.prototype.getRandomColor = function(){
