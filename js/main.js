@@ -3,7 +3,7 @@ function Application(){
 	this.rowsRendered = 0;
 	this.windowHeight = 0; // to be calculated on document ready
 	this.tableHeight = 0; // to be calculated on each incremental render
-	this.defaultTab = '#page-hello';
+	this.defaultTabID = '#page-hello';
 	// constants
 	this.ROWS_LENGTH = 256;
 	this.COLUMNS_LENGTH = 8;
@@ -25,10 +25,10 @@ Application.prototype.init = function(){
 	
 	window.onpopstate = function(event) {
 		//console.log('pop');
-		_this.showTab(event.state ? event.state.id : _this.defaultTab);
+		_this.showTab(event.state ? event.state.id : _this.defaultTabID);
 	};
 	
-	this.showTab(location.hash || this.defaultTab);
+	this.showTab(location.hash || this.defaultTabID);
 	$('#page-nav, #pages').show();
 	
 	// scroll and incremental render
@@ -116,8 +116,10 @@ Application.prototype.renderObject = function(object){
 
 Application.prototype.showTab = function(id){
 	//console.log(id);
-	$('#page-nav a[href="'+id+'"]').parent().addClass('active').siblings('.page-nav').removeClass('active');
+	var $link = $('#page-nav a[href="'+id+'"]');
+	$link.parent().addClass('active').siblings('.page-nav').removeClass('active');
 	$(id).addClass('active').siblings('.page').removeClass('active');
+	document.title = $link.text();
 }
 
 $(document).ready(function(){
